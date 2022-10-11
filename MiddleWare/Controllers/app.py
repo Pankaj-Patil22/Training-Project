@@ -7,6 +7,7 @@ app = Flask(__name__)
 
 app.secret_key = os.urandom(24)
 
+#dummy method
 @app.route('/getCost/', methods = ['GET'])
 # @cross_origin()
 def getCost():
@@ -14,6 +15,8 @@ def getCost():
     response.headers.add('Access-Control-Allow-Origin', '*')
     print(response)
     return response
+
+
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
