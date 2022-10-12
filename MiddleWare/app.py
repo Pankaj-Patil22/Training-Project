@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, session, render_template, flash, redirect, url_for, send_file
-#  from flask_cors import CORS
+from flask_cors import CORS
 import os, re
 import sqlite3
 
@@ -9,7 +9,7 @@ from Actions.menu_service_impl import Menu_service_impl as Menu_service
 menu_service = Menu_service()
 
 app = Flask(__name__)
-# cors = CORS(app)
+cors = CORS(app)
 
 app.secret_key = os.urandom(24)
 
@@ -45,7 +45,18 @@ def getMenu():
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
-
+@app.route('/transactionData/', methods = ['POST'])
+def transactionData():
+    print("transactionData")
+    print("transactionasdasdadasdasdasdasdasdsaddddddddddddddddddddddddddddddddddddddddddddddddddddddddData")
+    content_type = request.headers.get('Content-Type')
+    if (content_type == 'application/json'):
+        json = request.json
+        return jsonify("success")
+    else:
+        return 'Content-Type not supported!'
+    
+    
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     app.run(debug = True, host = '0.0.0.0', port = port)
