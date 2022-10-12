@@ -21,7 +21,7 @@ def getCost():
     print(response)
     return response
 
-@app.route('/Tables', methods = ['GET'])
+@app.route('/tables', methods = ['GET'])
 def get_available_tables():
     date=Date(2019, 12, 2)
     reservation=TableService.get_available_tables(2,date )[0]

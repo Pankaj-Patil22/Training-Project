@@ -1,158 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <title>Bootstrap Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../CSS/styles.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/material-ui/4.12.4/index.js" integrity="sha512-wEnX3bNd/CdyrOFR0KIGlHihK/w9x3/It8Vc18aymEF/F/f1q0Mq8T+GSxF1wYUACLEGECapuIYQdQlKY1LBJw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>  
-</head>
-<body>
-
-<nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #361500;">
-    <div class="container-fluid">
+  <head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link href="../CSS/styles.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/material-ui/4.12.4/index.js"
+      integrity="sha512-wEnX3bNd/CdyrOFR0KIGlHihK/w9x3/It8Vc18aymEF/F/f1q0Mq8T+GSxF1wYUACLEGECapuIYQdQlKY1LBJw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </head>
+  <body>
+    <nav
+      class="navbar navbar-expand-sm navbar-dark"
+      style="background-color: #361500"
+    >
+      <div class="container-fluid">
         <a class="navbar-brand" href="home.html">
-            <img src="../Images/logo.png" alt="Avatar Logo" style="width: 70px;" class="rounded-pill">
+          <img
+            src="../Images/logo.png"
+            alt="Avatar Logo"
+            style="width: 70px"
+            class="rounded-pill"
+          />
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-            <span class="navbar-toggler-icon"></span>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapsibleNavbar"
+        >
+          <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
-            <div class="mx-auto">
-                <ul class="navbar-nav text-center">
-                    <li class="nav-item">
-                        <a class="nav-link " href="home.html" style="color: #F8EDE3;">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="tables.html"  style="color: #F8EDE3;">Tables</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="home.html"  style="color: #F8EDE3;">Menu</a>
-                    </li> 
-                </ul>
-            </div> 
+          <div class="mx-auto">
             <ul class="navbar-nav text-center">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"  style="color: #F8EDE3;">Orders</a>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="#">Order History</a></li>
-                        <li><a class="dropdown-item" href="#">Order Status</a></li>
-                    </ul>
-                </li>
+              <li class="nav-item">
+                <a class="nav-link" href="home.html" style="color: #f8ede3"
+                  >Home</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="tables.html" style="color: #f8ede3"
+                  >Tables</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="home.html" style="color: #f8ede3"
+                  >Menu</a
+                >
+              </li>
             </ul>
+          </div>
+          <ul class="navbar-nav text-center">
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                style="color: #f8ede3"
+                >Orders</a
+              >
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="#">Order History</a></li>
+                <li><a class="dropdown-item" href="#">Order Status</a></li>
+              </ul>
+            </li>
+          </ul>
         </div>
-    </div>
-</nav>
+      </div>
+    </nav>
 
-<div class="plane">
-    <div class="cockpit">
-      <h1>Please select a seat</h1>
+    <div class="plane">
+      <div class="cockpit">
+        <h1>Please select a seat</h1>
+      </div>
+      <div class="exit exit--front fuselage"></div>
+      <ol class="cabin fuselage">
+        <li class="row row--1">
+          <ol class="seats" type="A">
+            <li class="seat">
+              <input type="checkbox" id="1A" />
+              <label for="1A">1A</label>
+              <div class="chair-3"></div>
+              <div class="chair-4"></div>
+            </li>
+            <li class="seat">
+              <input type="checkbox" id="1B" />
+              <label for="1B">1B</label>
+              <div class="chair-1"></div>
+              <div class="chair-2"></div>
+              <div class="chair-3"></div>
+              <div class="chair-4"></div>
+            </li>
+            <li class="seat">
+              <input type="checkbox" id="1C" />
+              <label for="1C">1C</label>
+              <div class="chair-1"></div>
+              <div class="chair-2"></div>
+              <div class="chair-3"></div>
+              <div class="chair-4"></div>
+            </li>
+            <li class="seat">
+              <input type="checkbox" disabled id="1D" />
+              <label for="1D">Occupied</label>
+              <div class="chair-3"></div>
+              <div class="chair-4"></div>
+            </li>
+          </ol>
+        </li>
+        <li class="row row--2">
+          <ol class="seats" type="A">
+            <li class="seat">
+              <input type="checkbox" id="2A" />
+              <label for="2A">2A</label>
+              <div class="chair-3"></div>
+              <div class="chair-4"></div>
+            </li>
+            <li class="seat">
+              <input type="checkbox" id="2B" />
+              <label for="2B">2B</label>
+              <div class="chair-1"></div>
+              <div class="chair-2"></div>
+              <div class="chair-3"></div>
+              <div class="chair-4"></div>
+            </li>
+            <li class="seat">
+              <input type="checkbox" id="2C" />
+              <label for="2C">2C</label>
+              <div class="chair-1"></div>
+              <div class="chair-2"></div>
+              <div class="chair-3"></div>
+              <div class="chair-4"></div>
+            </li>
+            <li class="seat">
+              <input type="checkbox" id="2D" />
+              <label for="2D">2D</label>
+              <div class="chair-3"></div>
+              <div class="chair-4"></div>
+            </li>
+          </ol>
+        </li>
+        <li class="row row--3">
+          <ol class="seats" type="A">
+            <li class="seat">
+              <input type="checkbox" id="3A" />
+              <label for="3A">3A</label>
+              <div class="chair-3"></div>
+              <div class="chair-4"></div>
+            </li>
+            <li class="seat">
+              <input type="checkbox" id="3B" />
+              <label for="3B">3B</label>
+              <div class="chair-1"></div>
+              <div class="chair-2"></div>
+              <div class="chair-3"></div>
+              <div class="chair-4"></div>
+            </li>
+            <li class="seat">
+              <input type="checkbox" id="3C" />
+              <label for="3C">3C</label>
+              <div class="chair-1"></div>
+              <div class="chair-2"></div>
+              <div class="chair-3"></div>
+              <div class="chair-4"></div>
+            </li>
+            <li class="seat">
+              <input type="checkbox" id="3D" />
+              <label for="3D">3D</label>
+              <div class="chair-3"></div>
+              <div class="chair-4"></div>
+            </li>
+          </ol>
+        </li>
+      </ol>
+      <div style="border-bottom: 10px solid #d8d8d8"></div>
     </div>
-    <div class="exit exit--front fuselage">
-      
-    </div>
-    <ol class="cabin fuselage">
-      <li class="row row--1">
-        <ol class="seats" type="A">
-          <li class="seat">
-            <input type="checkbox" id="1A" />
-            <label for="1A">1A</label>
-            <div class="chair-3"></div>
-            <div class="chair-4"></div>
-          </li>
-          <li class="seat">
-            <input type="checkbox" id="1B" />
-            <label for="1B">1B</label>
-            <div class="chair-1"></div>
-            <div class="chair-2"></div>
-            <div class="chair-3"></div>
-            <div class="chair-4"></div>
-          </li>
-          <li class="seat">
-            <input type="checkbox" id="1C" />
-            <label for="1C">1C</label>
-            <div class="chair-1"></div>
-            <div class="chair-2"></div>
-            <div class="chair-3"></div>
-            <div class="chair-4"></div>
-          </li>
-          <li class="seat">
-            <input type="checkbox" disabled id="1D" />
-            <label for="1D">Occupied</label>
-            <div class="chair-3"></div>
-            <div class="chair-4"></div>
-          </li>
-        </ol>
-      </li>
-      <li class="row row--2">
-        <ol class="seats" type="A">
-          <li class="seat">
-            <input type="checkbox" id="2A" />
-            <label for="2A">2A</label>
-            <div class="chair-3"></div>
-            <div class="chair-4"></div>
-          </li>
-          <li class="seat">
-            <input type="checkbox" id="2B" />
-            <label for="2B">2B</label>
-            <div class="chair-1"></div>
-            <div class="chair-2"></div>
-            <div class="chair-3"></div>
-            <div class="chair-4"></div>
-          </li>
-          <li class="seat">
-            <input type="checkbox" id="2C" />
-            <label for="2C">2C</label>
-            <div class="chair-1"></div>
-            <div class="chair-2"></div>
-            <div class="chair-3"></div>
-            <div class="chair-4"></div>
-          </li>
-          <li class="seat">
-            <input type="checkbox" id="2D" />
-            <label for="2D">2D</label>
-            <div class="chair-3"></div>
-            <div class="chair-4"></div>
-          </li>
-        </ol>
-      </li>
-      <li class="row row--3">
-        <ol class="seats" type="A">
-          <li class="seat">
-            <input type="checkbox" id="3A" />
-            <label for="3A">3A</label>
-            <div class="chair-3"></div>
-            <div class="chair-4"></div>
-          </li>
-          <li class="seat">
-            <input type="checkbox" id="3B" />
-            <label for="3B">3B</label>
-            <div class="chair-1"></div>
-            <div class="chair-2"></div>
-            <div class="chair-3"></div>
-            <div class="chair-4"></div>
-          </li>
-          <li class="seat">
-            <input type="checkbox" id="3C" />
-            <label for="3C">3C</label>
-            <div class="chair-1"></div>
-            <div class="chair-2"></div>
-            <div class="chair-3"></div>
-            <div class="chair-4"></div>
-          </li>
-          <li class="seat">
-            <input type="checkbox" id="3D" />
-            <label for="3D">3D</label>
-            <div class="chair-3"></div>
-            <div class="chair-4"></div>
-          </li>
-        </ol>
-      </li>
-      
-    </ol>
-    <div style="border-bottom: 10px solid #d8d8d8;">
-      
-    </div>
-  </div>
+  </body>
+</html>
