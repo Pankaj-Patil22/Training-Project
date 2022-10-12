@@ -1,12 +1,17 @@
-from flask import Flask, request, jsonify, session, render_template, flash, redirect, url_for, send_file
+from flask import Flask, jsonify
 #  from flask_cors import CORS
-import os, re
-import sqlite3
+import os
 
 import jsonpickle
 from Actions.menu_service_impl import Menu_service_impl as Menu_service
 
 menu_service = Menu_service()
+import os
+from sqlite3 import Date
+import DTO.available_table_dto as available_table_dto
+from Actions.table_service_impl import TableServiceImpl as TableService
+
+table_service = TableService()
 
 app = Flask(__name__)
 # cors = CORS(app)
@@ -42,6 +47,12 @@ def getMenu():
     })
         
     response = jsonify(arr)
+@app.route('/Tables', methods = ['GET'])
+def get_available_tables():
+    date=Date(2019, 12, 2)
+    reservation=TableService.get_available_tables(2,date )[0]
+    table_reservation=available_table_dto.AvailableTableDTO(reservation).__dict__
+    response = jsonify({"table_reservation": table_reservation})
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 

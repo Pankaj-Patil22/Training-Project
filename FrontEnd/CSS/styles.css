@@ -18,7 +18,7 @@ html {
   position: relative;
   overflow: hidden;
   text-align: center;
-  border-bottom: 10px solid #d8d8d8;
+  border-bottom: 10px solid #807070;
 }
 /* .cockpit:before {
   content: "";
@@ -64,8 +64,8 @@ html {
 } */
 
 .fuselage {
-  border-right: 5px solid #bbeeee;
-  border-left: 5px solid #bbeeee;
+  border-right: 5px solid #13c7c7;
+  border-left: 5px solid #13c7c7;
 }
 
 ol {
@@ -268,4 +268,29 @@ ol {
     box-shadow: 0 3px 9pt rgba(0, 0, 0, 0.23), 0 3px 9pt rgba(0, 0, 0, 0.16);
     left: 60px;
     top: 60px;
+  }
+
+  .tableAvailable {
+    position: absolute;
+    width: 60px;
+    height: 25px;
+    background-color: #1098d6;
+    left: 200px;
+    top: 100px;
+  }
+  .tableUnavailable {
+    position: absolute;
+    width: 80px;
+    height: 25px;
+    background-color: #8f8b8b;
+    left: 400px;
+    top: 100px;
+  }
+  .tableSelected {
+    position: absolute;
+    width: 60px;
+    height: 25px;
+    background-color: #bada55;
+    left: 600px;
+    top: 100px;
   }

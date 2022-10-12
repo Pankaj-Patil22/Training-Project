@@ -8,48 +8,68 @@
   <link href="../CSS/styles.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/material-ui/4.12.4/index.js" integrity="sha512-wEnX3bNd/CdyrOFR0KIGlHihK/w9x3/It8Vc18aymEF/F/f1q0Mq8T+GSxF1wYUACLEGECapuIYQdQlKY1LBJw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>  
+  <script src="../JS/table.js"></script>
 </head>
-<body>
+<body style="background: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), url(../Images/eberhard-grossgasteiger-S-2Ukb_VqpA-unsplash.jpg);" onload="getAvailableTables()">
 
-<nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #361500;">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="home.html">
-            <img src="../Images/logo.png" alt="Avatar Logo" style="width: 70px;" class="rounded-pill">
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="collapsibleNavbar">
-            <div class="mx-auto">
-                <ul class="navbar-nav text-center">
-                    <li class="nav-item">
-                        <a class="nav-link " href="home.html" style="color: #F8EDE3;">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="tables.html"  style="color: #F8EDE3;">Tables</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="home.html"  style="color: #F8EDE3;">Menu</a>
-                    </li> 
-                </ul>
-            </div> 
-            <ul class="navbar-nav text-center">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"  style="color: #F8EDE3;">Orders</a>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="#">Order History</a></li>
-                        <li><a class="dropdown-item" href="#">Order Status</a></li>
+
+    <nav class="navbar navbar-expand-sm navbar-dark" style="background: rgba(54, 21, 0, 0.3);" >
+        <div class="container-fluid">
+            <a class="navbar-brand" href="home.html">
+                <img src="../Images/logo.png" alt="Avatar Logo" style="width: 70px;" class="rounded-pill">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <div class="mx-auto">
+                    <ul class="navbar-nav text-center">
+                        <li class="nav-item" style="padding-right: 200px;">
+                            <a class="nav-link " href="home.html" style="color: #212529;">Home</a>
+                        </li>
+                        <li class="nav-item" style="padding-right: 200px;">
+                            <a class="nav-link" href="tables.html"  style="color: #212529;">Tables</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="home.html"  style="color: #212529;">Menu</a>
+                        </li> 
                     </ul>
-                </li>
-            </ul>
+                </div> 
+                <ul class="navbar-nav text-center">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"  style="color: #212529;">Orders</a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#">Order History</a></li>
+                            <li><a class="dropdown-item" href="#">Order Status</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
 <div class="plane">
     <div class="cockpit">
-      <h1>Please select a seat</h1>
+      <h1>Please select a table</h1>
+      <div class="dateTime">
+        <select>
+            <option>8-9</option>
+            <option>9-10</option>
+            <option>10-11</option>
+            <option>11-12</option>
+            <option>12-13</option>
+            <option>13-14</option>
+            <option>14-15</option>
+            <option>15-16</option>
+            <option>16-17</option>
+            <option>17-18</option>
+            <option>18-19</option>
+            <option>19-20</option>
+        </select>
+        <input type="date" id="date" name="date" min="2022-10-12">
     </div>
+    </div>
+    
     <div class="exit exit--front fuselage">
       
     </div>
@@ -57,30 +77,30 @@
       <li class="row row--1">
         <ol class="seats" type="A">
           <li class="seat">
-            <input type="checkbox" id="1A" />
-            <label for="1A">1A</label>
+            <input type="checkbox" id="1" class="one" onchange='handleChange(this);'/>
+            <label for="1">1</label>
             <div class="chair-3"></div>
             <div class="chair-4"></div>
           </li>
           <li class="seat">
-            <input type="checkbox" id="1B" />
-            <label for="1B">1B</label>
+            <input type="checkbox" id="2" class="two" onchange='handleChange(this);'/>
+            <label for="2">2</label>
             <div class="chair-1"></div>
             <div class="chair-2"></div>
             <div class="chair-3"></div>
             <div class="chair-4"></div>
           </li>
           <li class="seat">
-            <input type="checkbox" id="1C" />
-            <label for="1C">1C</label>
+            <input type="checkbox" id="3" class="three" onchange='handleChange(this);'/>
+            <label for="3">3</label>
             <div class="chair-1"></div>
             <div class="chair-2"></div>
             <div class="chair-3"></div>
             <div class="chair-4"></div>
           </li>
           <li class="seat">
-            <input type="checkbox" disabled id="1D" />
-            <label for="1D">Occupied</label>
+            <input type="checkbox" disabled id="4" class="four" onchange='handleChange(this);'/>
+            <label for="4">4</label>
             <div class="chair-3"></div>
             <div class="chair-4"></div>
           </li>
@@ -89,30 +109,30 @@
       <li class="row row--2">
         <ol class="seats" type="A">
           <li class="seat">
-            <input type="checkbox" id="2A" />
-            <label for="2A">2A</label>
+            <input type="checkbox" id="5" class="five" onchange='handleChange(this);'/>
+            <label for="5">5</label>
             <div class="chair-3"></div>
             <div class="chair-4"></div>
           </li>
           <li class="seat">
-            <input type="checkbox" id="2B" />
-            <label for="2B">2B</label>
+            <input type="checkbox" id="6" class="six" onchange='handleChange(this);'/>
+            <label for="6">6</label>
             <div class="chair-1"></div>
             <div class="chair-2"></div>
             <div class="chair-3"></div>
             <div class="chair-4"></div>
           </li>
           <li class="seat">
-            <input type="checkbox" id="2C" />
-            <label for="2C">2C</label>
+            <input type="checkbox" id="7" class="seven"onchange='handleChange(this);'/>
+            <label for="7">7</label>
             <div class="chair-1"></div>
             <div class="chair-2"></div>
             <div class="chair-3"></div>
             <div class="chair-4"></div>
           </li>
           <li class="seat">
-            <input type="checkbox" id="2D" />
-            <label for="2D">2D</label>
+            <input type="checkbox" id="8" class="eight" onchange='handleChange(this);'/>
+            <label for="8">8</label>
             <div class="chair-3"></div>
             <div class="chair-4"></div>
           </li>
@@ -121,30 +141,30 @@
       <li class="row row--3">
         <ol class="seats" type="A">
           <li class="seat">
-            <input type="checkbox" id="3A" />
-            <label for="3A">3A</label>
+            <input type="checkbox" id="9" class="nine" onchange='handleChange(this);'/>
+            <label for="9">9</label>
             <div class="chair-3"></div>
             <div class="chair-4"></div>
           </li>
           <li class="seat">
-            <input type="checkbox" id="3B" />
-            <label for="3B">3B</label>
+            <input type="checkbox" id="10" class="ten" onchange='handleChange(this);'/>
+            <label for="10">10</label>
             <div class="chair-1"></div>
             <div class="chair-2"></div>
             <div class="chair-3"></div>
             <div class="chair-4"></div>
           </li>
           <li class="seat">
-            <input type="checkbox" id="3C" />
-            <label for="3C">3C</label>
+            <input type="checkbox" id="11" class="eleven" onchange='handleChange(this);'/>
+            <label for="11">11</label>
             <div class="chair-1"></div>
             <div class="chair-2"></div>
             <div class="chair-3"></div>
             <div class="chair-4"></div>
           </li>
           <li class="seat">
-            <input type="checkbox" id="3D" />
-            <label for="3D">3D</label>
+            <input type="checkbox" id="12" class="twelve" onchange='handleChange(this);'/>
+            <label for="12">12</label>
             <div class="chair-3"></div>
             <div class="chair-4"></div>
           </li>
@@ -152,7 +172,11 @@
       </li>
       
     </ol>
-    <div style="border-bottom: 10px solid #d8d8d8;">
-      
-    </div>
+    <div style="border-bottom: 10px solid #807070;">
+  </div>
+  <div style="position:absolute;">
+    <div class="tableAvailable"><br>Available</div>
+    <div class="tableUnavailable"><br>Unavailable</div>
+    <div class="tableSelected"><br>Selected</div>
+</div>
   </div>
