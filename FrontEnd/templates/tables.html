@@ -10,7 +10,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/material-ui/4.12.4/index.js" integrity="sha512-wEnX3bNd/CdyrOFR0KIGlHihK/w9x3/It8Vc18aymEF/F/f1q0Mq8T+GSxF1wYUACLEGECapuIYQdQlKY1LBJw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>  
   <script src="../JS/table.js"></script>
 </head>
-<body style="background: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), url(../Images/eberhard-grossgasteiger-S-2Ukb_VqpA-unsplash.jpg);" onload="getAvailableTables()">
+<body style="background: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), url(../Images/eberhard-grossgasteiger-S-2Ukb_VqpA-unsplash.jpg);" onload="getAvailableTables(),getDateMin()">
 
 
     <nav class="navbar navbar-expand-sm navbar-dark" style="background: rgba(54, 21, 0, 0.3);" >
@@ -48,36 +48,34 @@
         </div>
     </nav>
 
-<div class="plane">
-    <div class="cockpit">
-      <h1>Please select a table</h1>
-      <div class="dateTime">
-        <select>
-            <option>8-9</option>
-            <option>9-10</option>
-            <option>10-11</option>
-            <option>11-12</option>
-            <option>12-13</option>
-            <option>13-14</option>
-            <option>14-15</option>
-            <option>15-16</option>
-            <option>16-17</option>
-            <option>17-18</option>
-            <option>18-19</option>
-            <option>19-20</option>
-        </select>
-        <input type="date" id="date" name="date" min="2022-10-12">
-    </div>
-    </div>
-    
-    <div class="exit exit--front fuselage">
-      
-    </div>
-    <ol class="cabin fuselage">
-      <li class="row row--1">
-        <ol class="seats" type="A">
-          <li class="seat">
-            <input type="checkbox" id="1" class="one" onchange='handleChange(this);'/>
+<div class="box">
+    <div class="plane">
+        <div class="cockpit">
+            <h1>Please select a table</h1>
+            <div class="dateTime">
+                <select>
+                    <option class ="time 8" id="time-8">8-9</option>
+                    <option class ="time 9" id="time-9">9-10</option>
+                    <option class ="time 10" id="time-10">10-11</option>
+                    <option class ="time 11" id="time-11">11-12</option>
+                    <option class ="time 12" id="time-12">12-13</option>
+                    <option class ="time 13" id="time-13">13-14</option>
+                    <option class ="time 14" id="time-14">14-15</option>
+                    <option class ="time 15" id="time-15">15-16</option>
+                    <option class ="time 16" id="time-16">16-17</option>
+                    <option class ="time 17" id="time-17">17-18</option>
+                    <option class ="time 18" id="time-18">18-19</option>
+                    <option class ="time 19" id="time-19">19-20</option>
+                </select>
+                <input type="date" id="datefield" name="date" onchange="getAvailableTimmings()">
+            </div>
+        </div>
+        <div class="exit exit--front fuselage"></div>
+        <ol class="cabin fuselage">
+            <li class="row row--1">
+                <ol class="seats" type="A">
+                    <li class="seat">
+                        <input type="checkbox" id="1" class="one" onchange='handleChange(this);'/>
             <label for="1">1</label>
             <div class="chair-3"></div>
             <div class="chair-4"></div>
@@ -178,5 +176,8 @@
     <div class="tableAvailable"><br>Available</div>
     <div class="tableUnavailable"><br>Unavailable</div>
     <div class="tableSelected"><br>Selected</div>
+    </div>
+
+
 </div>
-  </div>
+</div>
