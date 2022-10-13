@@ -70,7 +70,7 @@ async function renderMenuData() {
   let html = "";
   for (let item of menuData) {
     let htmlSegment = `<div class="card" id="${"item-" + item.item_id}">
-        <img src="${item.image}"  width="200">
+        <img class="card-img-top" src="${item.image}">
         <h2>${item.name}</h2>
                         <p>${item.description}</p>
                         <p id="${"price-" + item.item_id}">Price: ${item.price}</p>
