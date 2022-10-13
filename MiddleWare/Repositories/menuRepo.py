@@ -7,6 +7,77 @@ Session = sessionmaker(bind=menu.engine)
 session = scoped_session(sessionmaker(bind=menu.engine))
 
 
+
+# class MenuRepository:
+#     session = scoped_session(sessionmaker(bind=menu.engine))
+    
+#     def insert_menu_record(name, description, eta, price, image, rating, veg, serving_size):
+#         menu_record = menu.Menu(name, description, eta, price, image, rating, veg, serving_size)    
+#         session.add(menu_record)
+#         session.commit()
+
+#     def get_menu_record(item_id):
+#         menu_record = session.query(menu.Menu).filter(menu.Menu.item_id == item_id).first()
+#         return session.execute(menu_record)
+        
+#     def get_all_menu_records():
+#         menu_records = session.query(menu.Menu).all()
+#         return menu_records
+
+#     # pagination all menu records
+#     def get_all_menu_records_paginated(page, per_page):
+#         menu_records = session.query(menu.Menu).paginate(page, per_page, False)
+#         return menu_records
+
+#     def get_all_veg_menu_records():
+#         menu_records = session.query(menu.Menu).filter(menu.Menu.veg == True).all()
+#         return menu_records
+
+#     def get_all_non_veg_menu_records():
+#         menu_records = session.query(menu.Menu).filter(menu.Menu.veg == False).all()
+#         return menu_records
+
+#     def update_menu_record(item_id, name, description, eta, price, image, rating, veg, serving_size):
+#         menu_record = session.query(menu.Menu).filter(menu.Menu.item_id == item_id).first()
+#         menu_record.name = name
+#         menu_record.description = description
+#         menu_record.eta = eta
+#         menu_record.price = price
+#         menu_record.image = image
+#         menu_record.rating = rating
+#         menu_record.veg = veg
+#         menu_record.serving_size = serving_size
+#         session.commit()
+
+#     def delete_menu_record(item_id):
+#         menu_record = session.query(menu.Menu).filter(menu.Menu.item_id == item_id).first()
+#         session.delete(menu_record)
+#         session.commit()
+
+#     def get_menu_record_by_name(name):
+#         menu_record = session.query(menu.Menu).filter(menu.Menu.name == name).first()
+#         return menu_record
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 def insert_menu_record(name, description, eta, price, image, rating, veg, serving_size):
     menu_record = menu.Menu(name, description, eta, price, image, rating, veg, serving_size)    
     session.add(menu_record)
@@ -16,7 +87,6 @@ def get_menu_record(item_id):
     menu_record = session.query(menu.Menu).filter(menu.Menu.item_id == item_id).first()
     return session.execute(menu_record)
     
-
 def get_all_menu_records():
     menu_records = session.query(menu.Menu).all()
     return menu_records
