@@ -62,7 +62,6 @@ def get_available_tables():
 @app.route('/transactionData/', methods = ['POST'])
 def transactionData():
     print("transactionData")
-    print("transactionasdasdadasdasdasdasdasdsaddddddddddddddddddddddddddddddddddddddddddddddddddddddddData")
     content_type = request.headers.get('Content-Type')
     if (content_type == 'application/json'):
         json = request.json

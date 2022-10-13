@@ -1,5 +1,5 @@
 from Actions.transaction_service import TransactionService
-import Repositories.table_repo as table_repo
+import Repositories.table_repository as table_repo
 
 # {'items': [{'itemId': 1, 'quantity': 2, 'price': 10, 'name': 'Not so good Bangdo', 'totalPrice': 20},
 #            {'itemId': 1, 'quantity': 2, 'price': 4200, 'name': 'chilli chicken', 'totalPrice': 8400},
