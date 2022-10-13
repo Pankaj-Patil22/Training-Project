@@ -48,14 +48,14 @@
         </div>
     </nav>
 
-<div class="box">
-    <div class="plane">
+<div class="box d-flex align-content-start flex-wrap">
+    <div class="plane" style="width: 70%; height: 80%;">
         <div class="cockpit">
             <h1>Please select a table</h1>
             <div class="dateTime">
-                <select>
-                    <option class ="time 8" id="time-8">8-9</option>
-                    <option class ="time 9" id="time-9">9-10</option>
+                <select name="timeSlot">
+                    <option class ="time 8" id="time-8" value="1">8-9</option>
+                    <option class ="time 9" id="time-9" value="2">9-10</option>
                     <option class ="time 10" id="time-10">10-11</option>
                     <option class ="time 11" id="time-11">11-12</option>
                     <option class ="time 12" id="time-12">12-13</option>
@@ -76,108 +76,112 @@
                 <ol class="seats" type="A">
                     <li class="seat">
                         <input type="checkbox" id="1" class="one" onchange='handleChange(this);'/>
-            <label for="1">1</label>
-            <div class="chair-3"></div>
-            <div class="chair-4"></div>
-          </li>
-          <li class="seat">
-            <input type="checkbox" id="2" class="two" onchange='handleChange(this);'/>
-            <label for="2">2</label>
-            <div class="chair-1"></div>
-            <div class="chair-2"></div>
-            <div class="chair-3"></div>
-            <div class="chair-4"></div>
-          </li>
-          <li class="seat">
-            <input type="checkbox" id="3" class="three" onchange='handleChange(this);'/>
-            <label for="3">3</label>
-            <div class="chair-1"></div>
-            <div class="chair-2"></div>
-            <div class="chair-3"></div>
-            <div class="chair-4"></div>
-          </li>
-          <li class="seat">
-            <input type="checkbox" disabled id="4" class="four" onchange='handleChange(this);'/>
-            <label for="4">4</label>
-            <div class="chair-3"></div>
-            <div class="chair-4"></div>
-          </li>
+                        <label for="1">1</label>
+                        <div class="chair-3"></div>
+                        <div class="chair-4"></div>
+                    </li>
+                    <li class="seat">
+                        <input type="checkbox" id="2" class="two" onchange='handleChange(this);'/>
+                        <label for="2">2</label>
+                        <div class="chair-1"></div>
+                        <div class="chair-2"></div>
+                        <div class="chair-3"></div>
+                        <div class="chair-4"></div>
+                    </li>
+                    <li class="seat">
+                        <input type="checkbox" id="3" class="three" onchange='handleChange(this);'/>
+                        <label for="3">3</label>
+                        <div class="chair-1"></div>
+                        <div class="chair-2"></div>
+                        <div class="chair-3"></div>
+                        <div class="chair-4"></div>
+                    </li>
+                    <li class="seat">
+                        <input type="checkbox" disabled id="4" class="four" onchange='handleChange(this);'/>
+                        <label for="4">4</label>
+                        <div class="chair-3"></div>
+                        <div class="chair-4"></div>
+                    </li>
+                </ol>
+            </li>
+            <li class="row row--2">
+                <ol class="seats" type="A">
+                    <li class="seat">
+                        <input type="checkbox" id="5" class="five" onchange='handleChange(this);'/>
+                        <label for="5">5</label>
+                        <div class="chair-3"></div>
+                        <div class="chair-4"></div>
+                    </li>
+                    <li class="seat">
+                        <input type="checkbox" id="6" class="six" onchange='handleChange(this);'/>
+                        <label for="6">6</label>
+                        <div class="chair-1"></div>
+                        <div class="chair-2"></div>
+                        <div class="chair-3"></div>
+                        <div class="chair-4"></div>
+                    </li>
+                    <li class="seat">
+                        <input type="checkbox" id="7" class="seven"onchange='handleChange(this);'/>
+                        <label for="7">7</label>
+                        <div class="chair-1"></div>
+                        <div class="chair-2"></div>
+                        <div class="chair-3"></div>
+                        <div class="chair-4"></div>
+                    </li>
+                    <li class="seat">
+                        <input type="checkbox" id="8" class="eight" onchange='handleChange(this);'/>
+                        <label for="8">8</label>
+                        <div class="chair-3"></div>
+                        <div class="chair-4"></div>
+                    </li>
+                </ol>
+            </li>
+            <li class="row row--3">
+                <ol class="seats" type="A">
+                    <li class="seat">
+                        <input type="checkbox" id="9" class="nine" onchange='handleChange(this);'/>
+                        <label for="9">9</label>
+                        <div class="chair-3"></div>
+                        <div class="chair-4"></div>
+                    </li>
+                    <li class="seat">
+                        <input type="checkbox" id="10" class="ten" onchange='handleChange(this);'/>
+                        <label for="10">10</label>
+                        <div class="chair-1"></div>
+                        <div class="chair-2"></div>
+                        <div class="chair-3"></div>
+                        <div class="chair-4"></div>
+                    </li>
+                    <li class="seat">
+                        <input type="checkbox" id="11" class="eleven" onchange='handleChange(this);'/>
+                        <label for="11">11</label>
+                        <div class="chair-1"></div>
+                        <div class="chair-2"></div>
+                        <div class="chair-3"></div>
+                        <div class="chair-4"></div>
+                    </li>
+                    <li class="seat">
+                        <input type="checkbox" id="12" class="twelve" onchange='handleChange(this);'/>
+                        <label for="12">12</label>
+                        <div class="chair-3"></div>
+                        <div class="chair-4"></div>
+                    </li>
+                </ol>
+            </li>
         </ol>
-      </li>
-      <li class="row row--2">
-        <ol class="seats" type="A">
-          <li class="seat">
-            <input type="checkbox" id="5" class="five" onchange='handleChange(this);'/>
-            <label for="5">5</label>
-            <div class="chair-3"></div>
-            <div class="chair-4"></div>
-          </li>
-          <li class="seat">
-            <input type="checkbox" id="6" class="six" onchange='handleChange(this);'/>
-            <label for="6">6</label>
-            <div class="chair-1"></div>
-            <div class="chair-2"></div>
-            <div class="chair-3"></div>
-            <div class="chair-4"></div>
-          </li>
-          <li class="seat">
-            <input type="checkbox" id="7" class="seven"onchange='handleChange(this);'/>
-            <label for="7">7</label>
-            <div class="chair-1"></div>
-            <div class="chair-2"></div>
-            <div class="chair-3"></div>
-            <div class="chair-4"></div>
-          </li>
-          <li class="seat">
-            <input type="checkbox" id="8" class="eight" onchange='handleChange(this);'/>
-            <label for="8">8</label>
-            <div class="chair-3"></div>
-            <div class="chair-4"></div>
-          </li>
-        </ol>
-      </li>
-      <li class="row row--3">
-        <ol class="seats" type="A">
-          <li class="seat">
-            <input type="checkbox" id="9" class="nine" onchange='handleChange(this);'/>
-            <label for="9">9</label>
-            <div class="chair-3"></div>
-            <div class="chair-4"></div>
-          </li>
-          <li class="seat">
-            <input type="checkbox" id="10" class="ten" onchange='handleChange(this);'/>
-            <label for="10">10</label>
-            <div class="chair-1"></div>
-            <div class="chair-2"></div>
-            <div class="chair-3"></div>
-            <div class="chair-4"></div>
-          </li>
-          <li class="seat">
-            <input type="checkbox" id="11" class="eleven" onchange='handleChange(this);'/>
-            <label for="11">11</label>
-            <div class="chair-1"></div>
-            <div class="chair-2"></div>
-            <div class="chair-3"></div>
-            <div class="chair-4"></div>
-          </li>
-          <li class="seat">
-            <input type="checkbox" id="12" class="twelve" onchange='handleChange(this);'/>
-            <label for="12">12</label>
-            <div class="chair-3"></div>
-            <div class="chair-4"></div>
-          </li>
-        </ol>
-      </li>
-      
-    </ol>
-    <div style="border-bottom: 10px solid #807070;">
-  </div>
-  <div style="position:absolute;">
-    <div class="tableAvailable"><br>Available</div>
-    <div class="tableUnavailable"><br>Unavailable</div>
-    <div class="tableSelected"><br>Selected</div>
+        <div style="border-bottom: 10px solid #807070;"></div>
+        <div style="position:absolute;">
+            <div class="tableAvailable"><br>Available</div>
+            <div class="tableUnavailable"><br>Unavailable</div>
+            <div class="tableSelected"><br>Selected</div>
+        </div>
     </div>
-
-
-</div>
+    <div id="tableBreakdownInfo"class="align-content:flex-start;" style="width: 30%; height: 80%;">
+        <h1>Price Breakdown</h1>
+        <br>
+        <div>
+            <h4 id="tableInfo">Table No. Selected: </h4>
+            <h4 id="totalPriceInfo">Total : </h4>
+        </div>
+    </div>
 </div>
