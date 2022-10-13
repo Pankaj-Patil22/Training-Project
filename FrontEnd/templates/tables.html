@@ -10,7 +10,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/material-ui/4.12.4/index.js" integrity="sha512-wEnX3bNd/CdyrOFR0KIGlHihK/w9x3/It8Vc18aymEF/F/f1q0Mq8T+GSxF1wYUACLEGECapuIYQdQlKY1LBJw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>  
   <script src="../JS/table.js"></script>
 </head>
-<body style="background: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), url(../Images/eberhard-grossgasteiger-S-2Ukb_VqpA-unsplash.jpg);" onload="getAvailableTables(),getDateMin()">
+<body style="background: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), url(../Images/eberhard-grossgasteiger-S-2Ukb_VqpA-unsplash.jpg);" onload="getAvailableTables()">
 
 
     <nav class="navbar navbar-expand-sm navbar-dark" style="background: rgba(54, 21, 0, 0.3);" >
@@ -40,7 +40,7 @@
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"  style="color: #212529;">Orders</a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item" href="#">Order History</a></li>
-                            <li><a class="dropdown-item" href="#">Order Status</a></li>
+                            <li><a class="dropdown-item" href="orderStatus.html">Order Status</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -53,19 +53,19 @@
         <div class="cockpit">
             <h1>Please select a table</h1>
             <div class="dateTime">
-                <select name="timeSlot">
+                <select name="timeSlot" id="selectTS">
                     <option class ="time 8" id="time-8" value="1">8-9</option>
                     <option class ="time 9" id="time-9" value="2">9-10</option>
-                    <option class ="time 10" id="time-10">10-11</option>
-                    <option class ="time 11" id="time-11">11-12</option>
-                    <option class ="time 12" id="time-12">12-13</option>
-                    <option class ="time 13" id="time-13">13-14</option>
-                    <option class ="time 14" id="time-14">14-15</option>
-                    <option class ="time 15" id="time-15">15-16</option>
-                    <option class ="time 16" id="time-16">16-17</option>
-                    <option class ="time 17" id="time-17">17-18</option>
-                    <option class ="time 18" id="time-18">18-19</option>
-                    <option class ="time 19" id="time-19">19-20</option>
+                    <option class ="time 10" id="time-10" value="3">10-11</option>
+                    <option class ="time 11" id="time-11" value="4">11-12</option>
+                    <option class ="time 12" id="time-12" value="5">12-13</option>
+                    <option class ="time 13" id="time-13" value="6">13-14</option>
+                    <option class ="time 14" id="time-14" value="7">14-15</option>
+                    <option class ="time 15" id="time-15" value="8">15-16</option>
+                    <option class ="time 16" id="time-16" value="9">16-17</option>
+                    <option class ="time 17" id="time-17" value="10">17-18</option>
+                    <option class ="time 18" id="time-18" value="11">18-19</option>
+                    <option class ="time 19" id="time-19" value="12">19-20</option>
                 </select>
                 <input type="date" id="datefield" name="date" onchange="getAvailableTimmings()">
             </div>
@@ -181,7 +181,7 @@
         <br>
         <div>
             <h4 id="tableInfo">Table No. Selected: </h4>
-            <h4 id="totalPriceInfo">Total : </h4>
+            <h4 id="totalPriceInfo">Total Amount: </h4>
         </div>
     </div>
 </div>

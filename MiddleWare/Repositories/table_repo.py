@@ -19,8 +19,9 @@ def insert_table_reservations(date, time_slot_id, one, two, three, four, five, s
     session.commit()
 
 def get_available_tables(slot_id, date):
-    tables = session.query(table_model.TableReservations).filter(table_model.TableReservations.time_slot_id==slot_id, table_model.TableReservations.date==date).all()
-    print("sdf",tables)
+    tables = session.query(table_model.TableReservations).filter(table_model.TableReservations.time_slot_id==slot_id, table_model.TableReservations.date==date).first()
+    if tables is None:
+        return table_model.TableReservations(date, slot_id, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     return tables
 
 def get_table_reservations():
@@ -31,6 +32,21 @@ def get_time_slots():
     time_slots = session.query(table_model.TimeSlots).all()
     return time_slots
 
+date=Date(2022,10,13)
+time_slot_id = 6
+one = 0
+two = 1
+three = 0
+four = 0
+five = 0
+six = 0
+seven = 0
+eight = 1
+nine = 0
+ten = 0
+eleven = 0
+twelve = 1
+insert_table_reservations(date, time_slot_id, one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve)
 
 # for i in range(1,12):
 #     date = Date(2019, 12, 2)

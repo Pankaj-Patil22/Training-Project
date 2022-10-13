@@ -100,7 +100,7 @@ ol {
   opacity: 0;
 }
 .seat input[type=checkbox]:checked + label {
-  background: #bada55;
+  background: #55da7b;
   -webkit-animation-name: rubberBand;
   animation-name: rubberBand;
   animation-duration: 300ms;
