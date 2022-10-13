@@ -55,4 +55,35 @@ class TableReservations (base):
         self.eleven = eleven
         self.twelve = twelve
 
+# class TablePrices (base):
+#     __tablename__ = 'table_prices'
+
+#     id = Column(Integer, primary_key=True, autoincrement=True)
+#     one=Column(Integer, default = 0)
+#     two=Column(Integer, default = 0)
+#     three=Column(Integer, default = 0)
+#     four=Column(Integer, default = 0)
+#     five=Column(Integer, default = 0)
+#     six=Column(Integer, default = 0)
+#     seven=Column(Integer, default = 0)
+#     eight=Column(Integer, default = 0)
+#     nine=Column(Integer, default = 0)
+#     ten=Column(Integer, default = 0)
+#     eleven=Column(Integer, default = 0)
+#     twelve=Column(Integer, default = 0)
+
+#     def __init__(self, one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve):
+#         self.one = one
+#         self.two = two
+#         self.three = three
+#         self.four = four
+#         self.five = five
+#         self.six = six
+#         self.seven = seven
+#         self.eight = eight
+#         self.nine = nine
+#         self.ten = ten
+#         self.eleven = eleven
+#         self.twelve = twelve
+
 base.metadata.create_all(engine)

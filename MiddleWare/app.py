@@ -21,16 +21,34 @@ def getCost():
     print(response)
     return response
 
-@app.route('/tables', methods = ['GET'])
-def get_available_tables():
-    date=Date(2019, 12, 2)
-    reservation=TableService.get_available_tables(2,date )[0]
-    table_reservation=available_table_dto.AvailableTableDTO(reservation).__dict__
-    response = jsonify({"table_reservation": table_reservation})
-    response.headers.add('Access-Control-Allow-Origin', '*')
-    return response
+@app.route('/tables/<int:year>/<int:month>/<int:day>/<int:time_slot_id>/', methods = ['GET'])
+def get_available_tables(year, month, day, time_slot_id):
+    if request.method == 'GET':
+        date=Date(year,month,day)
+        table_reservation=TableService.get_available_tables(time_slot_id,date )
+        response = jsonify({"table_reservation": table_reservation})
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
+
+@app.route('/tables/booking', methods = ['POST'])
+def insert_table_reservation():
+    if request.method == 'POST':
+        date=Date(request.json['date']['year'],request.json['date']['month'],request.json['date']['day'])
+        time_slot_id=request.json['time_slot_id']
+        reservations=request.json['reservations']
+        TableService.insert_table_reservations(date,time_slot_id,reservations)
+        response = jsonify({"message": "success"})
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
 
 
+@app.route('/tables/price', methods = ['GET'])
+def get_price():
+    if request.method == 'GET':
+        price=[1000,500,500,1000,1000,500,500,1000,1000,500,500,100]
+        response = jsonify({"prices": price})
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
