@@ -11,5 +11,9 @@ class TableServiceImpl(TableService):
         return available_table_dto.AvailableTableDTO(tables).__dict__
 
     def insert_table_reservations(date, time_slot_id, reservations):
-        
-        table_repo.insert_table_reservations(date, time_slot_id, reservations)
+        if table_repo.get_available_tables(time_slot_id, date) is None:
+            table_repo.insert_table_reservation(date, time_slot_id, reservations)
+            return "inserted"
+        else:
+            table_repo.update_table_reservation(date, time_slot_id, reservations)
+            return "updated"

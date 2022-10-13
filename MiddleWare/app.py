@@ -45,7 +45,7 @@ def insert_table_reservation():
 @app.route('/tables/price', methods = ['GET'])
 def get_price():
     if request.method == 'GET':
-        price=[1000,500,500,1000,1000,500,500,1000,1000,500,500,100]
+        price=[1000,500,500,1000,1000,500,500,1000,1000,500,500,1000]
         response = jsonify({"prices": price})
         response.headers.add('Access-Control-Allow-Origin', '*')
         return response
