@@ -2,17 +2,17 @@ from flask import Flask, request, jsonify, session, render_template, flash, redi
 from flask_cors import CORS
 import os, re
 import sqlite3
-
-import jsonpickle
-from Actions.menu_service_impl import Menu_service_impl as Menu_service
-
-menu_service = Menu_service()
 import os
 from sqlite3 import Date
 import DTO.available_table_dto as available_table_dto
 from Actions.table_service_impl import TableServiceImpl as TableService
+import jsonpickle
+from Actions.menu_service_impl import Menu_service_impl as Menu_service
+from Actions.transaction_service_impl import TransactionServiceImpl as TransactionService
 
+menu_service = Menu_service()
 table_service = TableService()
+transaction_service = TransactionService()
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -50,12 +50,32 @@ def getMenu():
     response = jsonify(arr)
     return response
 
-@app.route('/Tables', methods = ['GET'])
+@app.route('/Tables/', methods = ['GET'])
 def get_available_tables():
-    date=Date(2019, 12, 2)
-    reservation=TableService.get_available_tables(2,date )[0]
-    table_reservation=available_table_dto.AvailableTableDTO(reservation).__dict__
-    response = jsonify({"table_reservation": table_reservation})
+    print("\n\n\n\n")
+    print(request.args.get("choosenTimeSlot"), request.args.get("choosenDate"))
+    arr = request.args.get("choosenDate").split("-")
+    date=Date(int(arr[0]), int(arr[1]), int(arr[2]))
+    result = TableService.get_available_tables(request.args.get("choosenTimeSlot"), date)
+    print(result)
+    if (result == None or len(result) == 0):
+        response = jsonify({"table_reservation": {"one" : 0,
+                                                  "two" : 0,
+                                                  "three" : 0,
+                                                  "four" : 0,
+                                                  "five" : 0,
+                                                  "six" : 0,
+                                                  "seven" : 0,
+                                                  "eight" : 0,
+                                                  "nine": 0,
+                                                  "ten": 0,
+                                                  "eleven": 0,
+                                                  "twelve": 0
+                                                  }})
+    else:
+        reservation=result[0]
+        table_reservation=available_table_dto.AvailableTableDTO(reservation).__dict__
+        response = jsonify({"table_reservation": table_reservation})
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
@@ -65,7 +85,10 @@ def transactionData():
     content_type = request.headers.get('Content-Type')
     if (content_type == 'application/json'):
         json = request.json
-        print(json)
+        print("\n\n\n")
+        print(transaction_service.set_transaction_data(json))
+        print("done printing")
+        print("\n\n\n")
         return jsonify("success")
     else:
         return 'Content-Type not supported!'

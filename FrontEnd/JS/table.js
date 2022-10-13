@@ -52,12 +52,17 @@ function handleChange(checkbox) {
 }
 
 function getAvailableTables() {
-  fetch("http://127.0.0.1:5000/Tables")
+  var url = new URL("http://127.0.0.1:5000/Tables");
+  if (localStorage.getItem("choosenTimeSlot") == null || localStorage.getItem("choosenDate") == null){
+    return;
+  }
+  url.searchParams.append("choosenTimeSlot", localStorage.getItem("choosenTimeSlot"));
+  url.searchParams.append("choosenDate", localStorage.getItem("choosenDate"));
+  console.log(url);
+  fetch(url)
     .then((Response) => Response.json())
     .then((data) => {
-      // data.table_reservation.forEach(element => {
-      //     console.log(element)
-      // });
+      console.log(data);
       Object.entries(data.table_reservation).forEach(([key, value]) => {
         if (value == 1) {
           document.querySelector("." + key).removeAttribute("disabled", "");
@@ -131,6 +136,7 @@ function getAvailableTimmings() {
     "choosenDate",
     document.getElementById("datefield").value
   );
+  getAvailableTables();
   console.log("choosen date", localStorage.getItem("choosenDate"));
 }
 
@@ -144,6 +150,7 @@ function changeTimeSlot() {
     tableSessions[document.getElementById("timeSlots").value]
     );
   console.log("choosen time slot", localStorage.getItem("choosenTimeSlot"));
+  getAvailableTables();
 }
 
 function proocedToMenu() {
