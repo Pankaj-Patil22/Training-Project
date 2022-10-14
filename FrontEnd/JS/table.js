@@ -1,30 +1,69 @@
 console.log('You have connected...')
+
 yourGlobalVariable=[]
+
+tablePrices = {};
+
+tableSessions = {
+    "1": "8-9",
+    "2": "9-10",
+    "3": "10-11",
+    "4": "11-12",
+    "5": "12-13",
+    "6": "13-14",
+    "7": "14-15",
+    "8": "15-16",
+    "9": "16-17",
+    "10": "17-18",
+    "11": "18-19",
+    "12": "19-20"
+  }
+
+async function getTablePrices() {
+    await fetch("http://127.0.0.1:5000/tables/price")
+      .then((Response) => Response.json())
+      .then((data) => {
+        console.log(data.prices);
+        localStorage.setItem("tablePrices", JSON.stringify(data.prices));
+        tablePrices = data.prices;
+      });
+    console.log(tablePrices);
+  }
+  
+  async function getTableSessions() {
+    await fetch("http://127.0.0.1:5000/getTableSessions")
+      .then((Response) => Response.json())
+      .then((data) => {
+        console.log(data);
+        localStorage.setItem("tableSessions", JSON.stringify(data));
+        tableSessions = data;
+      });
+    console.log(tableSessions);
+  }
 
 function handleChange(checkbox) {
     totalPrice = 0;
     if(checkbox.checked == true){
         yourGlobalVariable.push(checkbox.id)
-        // document.getElementById("submit").removeAttribute("disabled");
     }else{
         yourGlobalVariable = yourGlobalVariable.filter(item => item !== checkbox.id)
-        // document.getElementById("submit").setAttribute("disabled", "disabled");
    }
    if(yourGlobalVariable.length != 0){
+    console.log(yourGlobalVariable, "this is the data generation");
+  localStorage.setItem("choosentables", JSON.stringify(yourGlobalVariable));
         yourGlobalVariable.forEach((element) => {
-            fetch("http://127.0.0.1:5000/tables/price")
-    .then(Response => Response.json())
-    .then(data => {
-        totalPrice += data.prices[element -1]
+            
+        totalPrice += tablePrices[element -1]
         document.getElementById("totalPriceInfo").innerText="Total Amount: "+totalPrice
-        prices = totalPrice
-    })
+        localStorage.setItem("totalPriceOfTable", totalPrice);
         })
         document.getElementById("tableInfo").innerText = "Table No. Selected: "+yourGlobalVariable
+        document.getElementById("tableSubmit").removeAttribute('disabled','')
    }
    else{
     document.getElementById("tableInfo").innerText="No tables selected!"
     document.getElementById("totalPriceInfo").innerText=""
+    document.getElementById("tableSubmit").setAttribute('disabled','')
    }
 }
 
@@ -189,4 +228,66 @@ function getAvailableTimmings(){
             document.getElementById("selectTS").value = "--"
         }
     }
+
+    localStorage.setItem(
+        "choosenDate",
+        document.getElementById("datefield").value
+      );
+      console.log("choosen date", localStorage.getItem("choosenDate"));
+
+      localStorage.setItem(
+        "choosenTimeSlotTime",
+        document.getElementById("selectTS").value
+      );
+      console.log("choosen time slot id", localStorage.getItem("choosenTimeSlotTime"));
+
+      console.log(tableSessions)
+
+      localStorage.setItem(
+        "choosenTimeSlot",
+        tableSessions[document.getElementById("selectTS").value]
+        );
+      console.log("choosen time slot ", localStorage.getItem("choosenTimeSlot"));
 }
+
+function changeTimeSlot() {
+    localStorage.setItem(
+        "choosenTimeSlotTime",
+        document.getElementById("selectTS").value
+      );
+      localStorage.setItem(
+        "choosenTimeSlot",
+        tableSessions[document.getElementById("selectTS").value]
+        );
+      console.log("choosen time slot", localStorage.getItem("choosenTimeSlot"));
+  }
+
+function proocedToMenu() {
+    console.log("prooced to menu");
+    console.log("choosenDate", localStorage.getItem("choosenDate"));
+    console.log("choosenTimeSlot", localStorage.getItem("choosenTimeSlot"));
+    console.log("choosentables", localStorage.getItem("choosentables"));
+  
+      // this doesnt work it takes by default the first date
+    if (localStorage.getItem("choosenDate") == null) {
+      alert("Please select a date");
+      return;
+    }
+    
+    // this doesnt work it takes by default the first time slot
+    if (localStorage.getItem("choosenTimeSlot") == null) {
+      alert("Please select a time slot");
+      return;
+    }
+    if (
+      localStorage.getItem("choosentables") == null ||
+      localStorage.getItem("choosentables") == "[]"
+    ) {
+      alert("Please select a table");
+      return;
+    }
+    window.location.href = "menu.html";
+  }
+
+  getTablePrices();
+getTableSessions();
