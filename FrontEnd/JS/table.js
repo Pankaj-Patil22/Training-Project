@@ -5,19 +5,19 @@ yourGlobalVariable=[]
 tablePrices = {};
 
 tableSessions = {
-    "1": "8-9",
-    "2": "9-10",
-    "3": "10-11",
-    "4": "11-12",
-    "5": "12-13",
-    "6": "13-14",
-    "7": "14-15",
-    "8": "15-16",
-    "9": "16-17",
-    "10": "17-18",
-    "11": "18-19",
-    "12": "19-20"
-  }
+  "1": "8-9",
+  "2": "9-10",
+  "3": "10-11",
+  "4": "11-12",
+  "5": "12-13",
+  "6": "13-14",
+  "7": "14-15",
+  "8": "15-16",
+  "9": "16-17",
+  "10": "17-18",
+  "11": "18-19",
+  "12": "19-20"
+}
 
 async function getTablePrices() {
     await fetch("http://127.0.0.1:5000/tables/price")
@@ -28,9 +28,9 @@ async function getTablePrices() {
         tablePrices = data.prices;
       });
     console.log(tablePrices);
-  }
+}
   
-  async function getTableSessions() {
+async function getTableSessions() {
     await fetch("http://127.0.0.1:5000/getTableSessions")
       .then((Response) => Response.json())
       .then((data) => {
@@ -39,7 +39,7 @@ async function getTablePrices() {
         tableSessions = data;
       });
     console.log(tableSessions);
-  }
+}
 
 function handleChange(checkbox) {
     totalPrice = 0;
@@ -49,13 +49,13 @@ function handleChange(checkbox) {
         yourGlobalVariable = yourGlobalVariable.filter(item => item !== checkbox.id)
    }
    if(yourGlobalVariable.length != 0){
-    console.log(yourGlobalVariable, "this is the data generation");
-  localStorage.setItem("choosentables", JSON.stringify(yourGlobalVariable));
+        console.log(yourGlobalVariable, "this is the data generation");
+        localStorage.setItem("choosentables", JSON.stringify(yourGlobalVariable));
         yourGlobalVariable.forEach((element) => {
             
-        totalPrice += tablePrices[element -1]
-        document.getElementById("totalPriceInfo").innerText="Total Amount: "+totalPrice
-        localStorage.setItem("totalPriceOfTable", totalPrice);
+            totalPrice += tablePrices[element -1]
+            document.getElementById("totalPriceInfo").innerText="Total Amount: "+totalPrice
+            localStorage.setItem("totalPriceOfTable", totalPrice);
         })
         document.getElementById("tableInfo").innerText = "Table No. Selected: "+yourGlobalVariable
         document.getElementById("tableSubmit").removeAttribute('disabled','')
@@ -93,77 +93,68 @@ function getAvailableTables(){
     if(hour >= 8 && hour <= 20){
         document.getElementById("datefield").setAttribute("min", today);
         fetch("http://127.0.0.1:5000/tables/"+yyyy+"/"+mm+"/"+dd+"/"+(hour-7))
-    .then(Response => Response.json())
-    .then(data => {
-        // data.table_reservation.forEach(element => {
-        //     console.log(element)
-        // });
-        Object.entries(data.table_reservation).forEach(([key,value]) => {  
-         if (value == 1){
-            document.querySelector("."+key).removeAttribute('disabled','')
-         }
-         else if(value ==0){
-            document.querySelector("."+key).setAttribute('disabled','')
-         }
+        .then(Response => Response.json())
+        .then(data => {
+            Object.entries(data.table_reservation).forEach(([key,value]) => {  
+                if (value == 1){
+                    document.querySelector("."+key).removeAttribute('disabled','')
+                }
+                else if(value ==0){
+                    document.querySelector("."+key).setAttribute('disabled','')
+                }
+            })
         })
-    })
-}
-if(hour<8)
-{
-    fetch("http://127.0.0.1:5000/tables/"+yyyy+"/"+mm+"/"+dd+"/1")
-    .then(Response => Response.json())
-    .then(data => {
-        // data.table_reservation.forEach(element => {
-        //     console.log(element)
-        // });
-        Object.entries(data.table_reservation).forEach(([key,value]) => {  
-         if (value == 1){
-            document.querySelector("."+key).removeAttribute('disabled','')
-         }
-         else if(value ==0){
-            document.querySelector("."+key).setAttribute('disabled','')
-         }
-        })
-    })
-}
-if(hour>20)
-{
-    var day = new Date();
-    var nextDay = new Date(day);
-    nextDay.setDate(day.getDate() + 1);
-
-    passNextdayDD = nextDay.getDate()
-    passNextdayMM =nextDay.getMonth() + 1
-
-    if (passNextdayDD < 10) {
-        passNextdayDD = '0' + passNextdayDD;
     }
 
-    if (passNextdayMM < 10) {
-        passNextdayMM = '0' + passNextdayMM;
-    } 
-
-    passNextDay = nextDay.getFullYear() + '-' + passNextdayMM + '-' + passNextdayDD
-    document.getElementById("datefield").setAttribute("min", passNextDay);
-    document.getElementById('datefield').value = passNextDay
-    getAvailableTimmings()
-
-    fetch("http://127.0.0.1:5000/tables/"+nextDay.getFullYear()+"/"+nextDay.getMonth()+"/"+nextDay.getDate()+"/1")
-    .then(Response => Response.json())
-    .then(data => {
-        // data.table_reservation.forEach(element => {
-        //     console.log(element)
-        // });
-        Object.entries(data.table_reservation).forEach(([key,value]) => {  
-         if (value == 1){
-            document.querySelector("."+key).removeAttribute('disabled','')
-         }
-         else if(value ==0){
-            document.querySelector("."+key).setAttribute('disabled','')
-         }
+    if(hour<8){
+        fetch("http://127.0.0.1:5000/tables/"+yyyy+"/"+mm+"/"+dd+"/1")
+        .then(Response => Response.json())
+        .then(data => {
+            Object.entries(data.table_reservation).forEach(([key,value]) => {  
+                if (value == 1){
+                    document.querySelector("."+key).removeAttribute('disabled','')
+                }
+                else if(value ==0){
+                    document.querySelector("."+key).setAttribute('disabled','')
+                }
+            })
         })
-    })
-}
+    }
+
+    if(hour>20){
+        var day = new Date();
+        var nextDay = new Date(day);
+        nextDay.setDate(day.getDate() + 1);
+
+        passNextdayDD = nextDay.getDate()
+        passNextdayMM =nextDay.getMonth() + 1
+
+        if (passNextdayDD < 10) {
+            passNextdayDD = '0' + passNextdayDD;
+        }
+
+        if (passNextdayMM < 10) {
+        passNextdayMM = '0' + passNextdayMM;
+        } 
+
+        passNextDay = nextDay.getFullYear() + '-' + passNextdayMM + '-' + passNextdayDD
+        document.getElementById("datefield").setAttribute("min", passNextDay);
+        document.getElementById('datefield').value = passNextDay
+        getAvailableTimmings()
+
+        fetch("http://127.0.0.1:5000/tables/"+nextDay.getFullYear()+"/"+nextDay.getMonth()+"/"+nextDay.getDate()+"/1")
+        .then(Response => Response.json())
+        .then(data => {
+            Object.entries(data.table_reservation).forEach(([key,value]) => {  
+                if (value == 1){
+                    document.querySelector("."+key).removeAttribute('disabled','')
+                }
+                else if(value ==0){
+                    document.querySelector("."+key).setAttribute('disabled','')
+                }
+            })
+        })
+    }
 }
 
 function getDateMin(){
@@ -229,38 +220,21 @@ function getAvailableTimmings(){
         }
     }
 
-    localStorage.setItem(
-        "choosenDate",
-        document.getElementById("datefield").value
-      );
-      console.log("choosen date", localStorage.getItem("choosenDate"));
+    localStorage.setItem("choosenDate", document.getElementById("datefield").value);
+    console.log("choosen date", localStorage.getItem("choosenDate"));
 
-      localStorage.setItem(
-        "choosenTimeSlotTime",
-        document.getElementById("selectTS").value
-      );
-      console.log("choosen time slot id", localStorage.getItem("choosenTimeSlotTime"));
+    localStorage.setItem("choosenTimeSlot", document.getElementById("selectTS").value);
+    console.log("choosen time slot id", localStorage.getItem("choosenTimeSlotTime"));
 
-      console.log(tableSessions)
-
-      localStorage.setItem(
-        "choosenTimeSlot",
-        tableSessions[document.getElementById("selectTS").value]
-        );
-      console.log("choosen time slot ", localStorage.getItem("choosenTimeSlot"));
+    localStorage.setItem("choosenTimeSlotTime", tableSessions[document.getElementById("selectTS").value]);
+    console.log("choosen time slot ", localStorage.getItem("choosenTimeSlot"));
 }
 
 function changeTimeSlot() {
-    localStorage.setItem(
-        "choosenTimeSlotTime",
-        document.getElementById("selectTS").value
-      );
-      localStorage.setItem(
-        "choosenTimeSlot",
-        tableSessions[document.getElementById("selectTS").value]
-        );
-      console.log("choosen time slot", localStorage.getItem("choosenTimeSlot"));
-  }
+    localStorage.setItem("choosenTimeSlot", document.getElementById("selectTS").value);
+    localStorage.setItem("choosenTimeSlotTime", tableSessions[document.getElementById("selectTS").value]);
+    console.log("choosen time slot", localStorage.getItem("choosenTimeSlot"));
+}
 
 function proocedToMenu() {
     console.log("prooced to menu");
@@ -287,7 +261,7 @@ function proocedToMenu() {
       return;
     }
     window.location.href = "menu.html";
-  }
+}
 
-  getTablePrices();
+getTablePrices();
 getTableSessions();
