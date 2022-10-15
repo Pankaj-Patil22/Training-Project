@@ -64,9 +64,9 @@ function getAvailableTables() {
     .then((data) => {
       console.log(data);
       Object.entries(data.table_reservation).forEach(([key, value]) => {
-        if (value == 1) {
+        if (value == 0) {
           document.querySelector("." + key).removeAttribute("disabled", "");
-        } else if (value == 0) {
+        } else if (value == 1) {
           document.querySelector("." + key).setAttribute("disabled", "");
         }
       });
@@ -88,7 +88,7 @@ function getDateMin() {
   }
 
   today = yyyy + "-" + mm + "-" + dd;
-  document.getElementById("datefield").setAttribute("min", today);
+  document.getElementById(" ").setAttribute("min", today);
 }
 
 function getAvailableTimmings() {

@@ -9,7 +9,7 @@ base = declarative_base()
 
 class Items (base):
     __tablename__ = 'items'
-
+    
     id = Column(Integer, primary_key=True, autoincrement=True)
     order_id = Column(Integer, ForeignKey('order.order_id'))
     item_id = Column(Integer, ForeignKey('menu.item_id'))
