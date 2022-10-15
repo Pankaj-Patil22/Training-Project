@@ -1,23 +1,24 @@
-# edited app.py file 
-from flask import Flask, request, jsonify, session, render_template, flash, redirect, url_for, send_file
+from flask import Flask, request, jsonify
 from flask_cors import CORS
-import os, jsonpickle
+import os
 from Actions.menu_service_impl import Menu_service_impl as Menu_service
 from sqlite3 import Date
 import DTO.available_table_dto as available_table_dto
 from Actions.table_service_impl import TableServiceImpl as TableService
-    
+from Actions.transaction_service_impl import TransactionServiceImpl as TransactionService
+
 class FlaskAppWrapper():
     def __init__(self):
         self.app = Flask(__name__)
         self._config()
         self._add_services()
         
+
         @self.app.route('/getTableSessions/', methods = ['GET'])
         def __table_Sessions():
             return self.get_table_sessions()
 
-        @self.app.route('/getTablePrices/', methods = ['GET'])
+        @self.app.route('/tables/price', methods=['GET'])
         def __table_Price():
             return self.get_table_prices()
 
@@ -25,9 +26,9 @@ class FlaskAppWrapper():
         def __transaction_data():
             return self.transaction_data()
 
-        @self.app.route('/Tables/', methods = ['GET'])
-        def __available_tables():
-            return self.get_available_tables()
+        @self.app.route('/tables/<int:year>/<int:month>/<int:day>/<int:time_slot_id>', methods=['GET'])
+        def __available_tables(year, month, day, time_slot_id):
+            return self.get_available_tables(year, month, day, time_slot_id)
         
         @self.app.route('/getMenu/', methods = ['GET'])
         def __menu():
@@ -40,7 +41,8 @@ class FlaskAppWrapper():
     def _add_services(self):
         self.table_service = TableService()
         self.menu_service = Menu_service()
-    
+        self.transaction_service = TransactionService()
+        
     def get_Menu(self):
         all_items = self.menu_service.get_all_items()
         arr = []
@@ -58,13 +60,13 @@ class FlaskAppWrapper():
         response = jsonify(arr)
         return response       
         
-    def get_available_tables(self):
-        date=Date(2019, 12, 2)
-        reservation=TableService.get_available_tables(2,date )[0]
-        table_reservation=available_table_dto.AvailableTableDTO(reservation).__dict__
-        response = jsonify({"table_reservation": table_reservation})
-        response.headers.add('Access-Control-Allow-Origin', '*')
-        return response
+    def get_available_tables(self, year, month, day, time_slot_id):
+        if request.method == 'GET':
+            date = Date(year, month, day)
+            table_reservation = self.table_service.get_available_tables(time_slot_id, date)
+            response = jsonify({"table_reservation": table_reservation})
+            response.headers.add('Access-Control-Allow-Origin', '*')
+            return response
 
     def get_table_sessions(self):
         tableSessions = {
@@ -85,21 +87,9 @@ class FlaskAppWrapper():
         return response 
 
     def get_table_prices(self):
-        tablePrices = {
-            1:1000,
-            2:2000,
-            3:3000,
-            4:4000,
-            5:5000,
-            6:6000,
-            7:7000,
-            8:8000,
-            9:9000,
-            10:10000,
-            11:11000,
-            12:12000
-        }
-        response = jsonify(tablePrices)
+        price = [1000, 500, 500, 1000, 1000, 500, 500, 1000, 1000, 500, 500, 1000]
+        response = jsonify({"prices": price})
+        response.headers.add('Access-Control-Allow-Origin', '*')
         return response
 
     def transaction_data(self):
@@ -107,10 +97,16 @@ class FlaskAppWrapper():
         content_type = request.headers.get('Content-Type')
         if (content_type == 'application/json'):
             json = request.json
-            print(json)
-            return jsonify({"success": True})
-        else:
-            return 'Content-Type not supported!'
+            try:
+                msg = self.transaction_service.set_transaction_data(json)
+                print(msg)
+                print("\n\n\n hitting success  \n\n\n")
+                if (type(msg) == int):
+                    return jsonify({"success": True})
+            except:
+                print("\n\n\n  error \n\n\n")
+        print("\n\n\n hitting faild  \n\n\n")
+        return jsonify({"success": False})
 
     def _corsify_actual_response(response):
         response.headers.add("Access-Control-Allow-Origin", "*")

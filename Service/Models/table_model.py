@@ -39,20 +39,21 @@ class TableReservations (base):
     eleven=Column(Integer, default = 0)
     twelve=Column(Integer, default = 0)
 
-    def __init__(self, date, time_slot_id, one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve):
+    def __init__(self, date, time_slot_id, reservations):
         self.date = date
         self.time_slot_id = time_slot_id
-        self.one = one
-        self.two = two
-        self.three = three
-        self.four = four
-        self.five = five
-        self.six = six
-        self.seven = seven
-        self.eight = eight
-        self.nine = nine
-        self.ten = ten
-        self.eleven = eleven
-        self.twelve = twelve
+        self.one = reservations[0]
+        self.two = reservations[1]
+        self.three = reservations[2]
+        self.four = reservations[3]
+        self.five = reservations[4]
+        self.six = reservations[5]
+        self.seven = reservations[6]
+        self.eight = reservations[7]
+        self.nine = reservations[8]
+        self.ten = reservations[9]
+        self.eleven = reservations[10]
+        self.twelve = reservations[11]
+        
 
 base.metadata.create_all(engine)

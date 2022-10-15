@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Bootstrap Example</title>
+    <title>Tables</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link
@@ -16,7 +16,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-    <script src="../JS/table.js"></script>
+    <script src="../JS/table.js" defer></script>
   </head>
   <body
     style="
@@ -26,7 +26,6 @@
         ),
         url(../Images/eberhard-grossgasteiger-S-2Ukb_VqpA-unsplash.jpg);
     "
-    onload="getAvailableTables(),getDateMin()"
   >
     <nav
       class="navbar navbar-expand-sm navbar-dark"
@@ -53,18 +52,27 @@
           <div class="mx-auto">
             <ul class="navbar-nav text-center">
               <li class="nav-item" style="padding-right: 200px">
-                <a class="nav-link" href="home.html" style="color: #212529"
-                  >Home</a
+                <a
+                  class="nav-link"
+                  href="home.html"
+                  style="color: #212529; font-size: 25px"
+                  ><strong>Home</strong></a
                 >
               </li>
               <li class="nav-item" style="padding-right: 200px">
-                <a class="nav-link" href="tables.html" style="color: #212529"
-                  >Tables</a
+                <a
+                  class="nav-link"
+                  href="tables.html"
+                  style="color: #212529; font-size: 25px"
+                  ><strong>Tables</strong></a
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="home.html" style="color: #212529"
-                  >Menu</a
+                <a
+                  class="nav-link"
+                  href="menu.html"
+                  style="color: #212529; font-size: 25px"
+                  ><strong>Menu</strong></a
                 >
               </li>
             </ul>
@@ -76,12 +84,16 @@
                 href="#"
                 role="button"
                 data-bs-toggle="dropdown"
-                style="color: #212529"
-                >Orders</a
+                style="color: #212529; font-size: 25px"
+                ><strong>Orders</strong></a
               >
               <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="#">Order History</a></li>
-                <li><a class="dropdown-item" href="#">Order Status</a></li>
+                <li>
+                  <a class="dropdown-item" href="history.html">Order History</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="status.html">Order Status</a>
+                </li>
               </ul>
             </li>
           </ul>
@@ -89,16 +101,13 @@
       </div>
     </nav>
 
-    <div class="box">
-      <div class="plane">
+    <div class="box d-flex align-content-start flex-wrap">
+      <div class="plane" style="width: 70%; height: 80%">
         <div class="cockpit">
           <h1>Please select a table</h1>
           <div class="dateTime">
-            <select id="timeSlots" onchange="changeTimeSlot()">
-              <option disabled selected>
-                -- select an option --
-              </option>
-              <option class="time 8" id="time-8" value="1">8-9</option>
+            <select name="timeSlot" id="selectTS" onchange="updateData()">
+              <option class="time 8" id="time-8" value="1" default>8-9</option>
               <option class="time 9" id="time-9" value="2">9-10</option>
               <option class="time 10" id="time-10" value="3">10-11</option>
               <option class="time 11" id="time-11" value="4">11-12</option>
@@ -115,7 +124,7 @@
               type="date"
               id="datefield"
               name="date"
-              onchange="getAvailableTimmings()"
+              onchange="updateData()"
             />
           </div>
         </div>
@@ -280,13 +289,26 @@
           </li>
         </ol>
         <div style="border-bottom: 10px solid #807070"></div>
-
-        <button onclick="proocedToMenu()">Proceed To Menu</button>
-
         <div style="position: absolute">
           <div class="tableAvailable"><br />Available</div>
           <div class="tableUnavailable"><br />Unavailable</div>
           <div class="tableSelected"><br />Selected</div>
+        </div>
+      </div>
+      <div
+        id="tableBreakdownInfo"
+        class="align-content:flex-start;"
+        style="width: 30%; height: 80%"
+      >
+        <h1>Price Breakdown</h1>
+        <br />
+        <div>
+          <h4 id="tableInfo">Table No. Selected:</h4>
+          <h4 id="totalPriceInfo">Total Amount:</h4>
+          <br />
+          <button id="tableSubmit" onclick="proocedToMenu()" disabled>
+            Proceed To Menu
+          </button>
         </div>
       </div>
     </div>

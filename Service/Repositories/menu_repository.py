@@ -2,95 +2,26 @@ from flask import session
 import Models.menu as menu
 from sqlalchemy.orm import sessionmaker, scoped_session
 
+
+session = scoped_session(sessionmaker(bind=menu.engine))
+
 class MenuRepository:
-    session = scoped_session(sessionmaker(bind=menu.engine))
     
     @staticmethod
     def insert_menu_record(name, description, eta, price, image, rating, veg, serving_size):
         menu_record = menu.Menu(name, description, eta, price, image, rating, veg, serving_size)    
-        MenuRepository.session.add(menu_record)
-        MenuRepository.session.commit()
-        if menu_record.item_id is None:
-            raise Exception("menu_record id is None")
-        return menu_record.item_id
-
-    @staticmethod
-    def get_first_menu_record(item_id):
-        return MenuRepository.session.query(menu.Menu).filter(menu.Menu.item_id == item_id).first()
+        session.add(menu_record)
+        session.commit()
         
     @staticmethod
     def get_all_menu_records():
-        menu_records = MenuRepository.session.query(menu.Menu).all()
+        menu_records = session.query(menu.Menu).all()
         return menu_records
-
     
+    @staticmethod
+    def get_first_menu_record(item_id):
+        return session.query(menu.Menu).filter(menu.Menu.item_id == item_id).first()
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-# def insert_menu_record(name, description, eta, price, image, rating, veg, serving_size):
-#     menu_record = menu.Menu(name, description, eta, price, image, rating, veg, serving_size)    
-#     session.add(menu_record)
-#     session.commit()
-
-# def get_menu_record(item_id):
-#     menu_record = session.query(menu.Menu).filter(menu.Menu.item_id == item_id).first()
-#     return session.execute(menu_record)
-    
-# def get_all_menu_records():
-#     menu_records = session.query(menu.Menu).all()
-#     return menu_records
-
-# # pagination all menu records
-# def get_all_menu_records_paginated(page, per_page):
-#     menu_records = session.query(menu.Menu).paginate(page, per_page, False)
-#     return menu_records
-
-# def get_all_veg_menu_records():
-#     menu_records = session.query(menu.Menu).filter(menu.Menu.veg == True).all()
-#     return menu_records
-
-# def get_all_non_veg_menu_records():
-#     menu_records = session.query(menu.Menu).filter(menu.Menu.veg == False).all()
-#     return menu_records
-
-# def update_menu_record(item_id, name, description, eta, price, image, rating, veg, serving_size):
-#     menu_record = session.query(menu.Menu).filter(menu.Menu.item_id == item_id).first()
-#     menu_record.name = name
-#     menu_record.description = description
-#     menu_record.eta = eta
-#     menu_record.price = price
-#     menu_record.image = image
-#     menu_record.rating = rating
-#     menu_record.veg = veg
-#     menu_record.serving_size = serving_size
-#     session.commit()
-
-# def delete_menu_record(item_id):
-#     menu_record = session.query(menu.Menu).filter(menu.Menu.item_id == item_id).first()
-#     session.delete(menu_record)
-#     session.commit()
-
-# def get_menu_record_by_name(name):
-#     menu_record = session.query(menu.Menu).filter(menu.Menu.name == name).first()
-#     return menu_record
-
-
 # insert_menu_record('Not So good Fish', 'king fish is for money, so we give it cheap. things are sometimes overrated', 30, 10, "https://th.bing.com/th/id/OIP.CdqlCxWYa-D_-_02gT5_BQHaF-?pid=ImgDet&rs=1", 4, False, 1)
 # insert_menu_record('fried shrimp','shrimp that nobody likes but everybody pretends to like it. sometimes people are difficult to understand', 30, 300 ,'https://4.bp.blogspot.com/-W6diqeLrpH4/Uo6_oXq3DPI/AAAAAAAAFiI/aT8Grsj5VuU/s1600/IMG_3355.JPG', 4, False, 1)
 # insert_menu_record('Not so good Bangdo', 'the most underrated not so good Bangdo, as the name implies its not so good', 5, 10, 'https://www.licious.in/blog/wp-content/uploads/2020/12/Mackerel-Fish-Fry.jpg', 1, False, 1)

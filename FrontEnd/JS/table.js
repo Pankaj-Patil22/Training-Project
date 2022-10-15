@@ -4,15 +4,16 @@ yourGlobalVariable = [];
 
 tablePrices = {};
 
-tableSessions = {};
+tableSessions = {
+};
 
 async function getTablePrices() {
-  await fetch("http://127.0.0.1:5000/getTablePrices")
+  await fetch("http://127.0.0.1:5000/tables/price")
     .then((Response) => Response.json())
     .then((data) => {
-      console.log(data);
-      localStorage.setItem("tablePrices", JSON.stringify(data));
-      tablePrices = data;
+      console.log(data.prices);
+      localStorage.setItem("tablePrices", JSON.stringify(data.prices));
+      tablePrices = data.prices;
     });
   console.log(tablePrices);
 }
@@ -28,129 +29,103 @@ async function getTableSessions() {
   console.log(tableSessions);
 }
 
-function handleChange(checkbox) {
-  if (checkbox.checked == true) {
-    yourGlobalVariable.push(checkbox.id);
-    // document.getElementById("submit").removeAttribute("disabled");
-  } else {
-    yourGlobalVariable = yourGlobalVariable.filter(
-      (item) => item !== checkbox.id
-    );
-    // document.getElementById("submit").setAttribute("disabled", "disabled");
-  }
-
-  console.log(yourGlobalVariable, "this is the data generation");
-  localStorage.setItem("choosentables", JSON.stringify(yourGlobalVariable));
-  totalPrice = 0;
-    yourGlobalVariable.forEach((element) => {
-        totalPrice += tablePrices[element];
-    });
-  localStorage.setItem("totalPriceOfTable", totalPrice);
-  
-  if (yourGlobalVariable.length != 0) {
-  }
-}
-
-function getAvailableTables() {
-  var url = new URL("http://127.0.0.1:5000/Tables");
-  if (localStorage.getItem("choosenTimeSlot") == null || localStorage.getItem("choosenDate") == null){
-    return;
-  }
-  url.searchParams.append("choosenTimeSlot", localStorage.getItem("choosenTimeSlot"));
-  url.searchParams.append("choosenDate", localStorage.getItem("choosenDate"));
-  console.log(url);
+function updateTable(date, timeslot) {
+  // considering date is given in format yyyy-mm-dd
+  dateArr = date.split("-");
+  url =
+    "http://127.0.0.1:5000/tables/" +
+    dateArr[0] +
+    "/" +
+    dateArr[1] +
+    "/" +
+    dateArr[2] +
+    "/" +
+    timeslot;
+  console.log("fetching url", url);
   fetch(url)
     .then((Response) => Response.json())
     .then((data) => {
-      console.log(data);
+      console.log("inside date change", data);
       Object.entries(data.table_reservation).forEach(([key, value]) => {
-        if (value == 0) {
+        if (value == 1) {
           document.querySelector("." + key).removeAttribute("disabled", "");
-        } else if (value == 1) {
+          console.log("inside date change remove disabled", key);
+        } else if (value == 0) {
           document.querySelector("." + key).setAttribute("disabled", "");
+          console.log("inside date change set disabled", key);
         }
       });
     });
 }
 
-function getDateMin() {
-  var today = new Date();
-  var dd = today.getDate();
-  var mm = today.getMonth() + 1; //January is 0!
-  var yyyy = today.getFullYear();
-
+function getDateInFormat(date) {
+  var dd = date.getDate();
+  var mm = date.getMonth() + 1; //January is 0!
+  var yyyy = date.getFullYear();
   if (dd < 10) {
     dd = "0" + dd;
   }
-
   if (mm < 10) {
     mm = "0" + mm;
   }
 
-  today = yyyy + "-" + mm + "-" + dd;
-  document.getElementById(" ").setAttribute("min", today);
+  return yyyy + "-" + mm + "-" + dd;
 }
 
-function getAvailableTimmings() {
-  var today = new Date();
-  var dd = today.getDate();
-  var mm = today.getMonth() + 1; //January is 0!
-  var yyyy = today.getFullYear();
-  var hour = today.getHours();
-
-  if (dd < 10) {
-    dd = "0" + dd;
-  }
-
-  if (mm < 10) {
-    mm = "0" + mm;
-  }
-
-  today = yyyy + "-" + mm + "-" + dd;
-
-  const notes = document.querySelectorAll(".time");
-
-  if (document.getElementById("datefield").value == today) {
-    console.log("today");
-    notes.forEach((note) => {
-      if (hour < note.classList[1]) {
-        document
-          .getElementById("time-" + note.classList[1])
-          .removeAttribute("disabled", "");
-      } else if (hour >= note.classList[1]) {
-        document
-          .getElementById("time-" + note.classList[1])
-          .setAttribute("disabled", "");
-      }
-    });
+function handleChange(checkbox) {
+  totalPrice = 0;
+  if (checkbox.checked == true) {
+    yourGlobalVariable.push(checkbox.id);
   } else {
-    console.log("not today");
-    notes.forEach((note) => {
-      document
-        .getElementById("time-" + note.classList[1])
-        .removeAttribute("disabled", "");
-    });
+    yourGlobalVariable = yourGlobalVariable.filter(
+      (item) => item !== checkbox.id
+    );
   }
+  if (yourGlobalVariable.length != 0) {
+    console.log(yourGlobalVariable, "this is the data generation");
+    localStorage.setItem("choosentables", JSON.stringify(yourGlobalVariable));
+    yourGlobalVariable.forEach((element) => {
+      totalPrice += tablePrices[element - 1];
+      document.getElementById("totalPriceInfo").innerText =
+        "Total Amount: " + totalPrice;
+      localStorage.setItem("totalPriceOfTable", totalPrice);
+    });
+    document.getElementById("tableInfo").innerText =
+      "Table No. Selected: " + yourGlobalVariable;
+    document.getElementById("tableSubmit").removeAttribute("disabled", "");
+  } else {
+    document.getElementById("tableInfo").innerText = "No tables selected!";
+    document.getElementById("totalPriceInfo").innerText = "";
+    document.getElementById("tableSubmit").setAttribute("disabled", "");
+  }
+}
 
+function updateData() {
   localStorage.setItem(
     "choosenDate",
     document.getElementById("datefield").value
   );
-  getAvailableTables();
   console.log("choosen date", localStorage.getItem("choosenDate"));
-}
 
-function changeTimeSlot() {
   localStorage.setItem(
     "choosenTimeSlot",
-    document.getElementById("timeSlots").value
+    document.getElementById("selectTS").value
   );
+  console.log(
+    "choosen time slot id",
+    localStorage.getItem("choosenTimeSlotTime")
+  );
+
   localStorage.setItem(
     "choosenTimeSlotTime",
-    tableSessions[document.getElementById("timeSlots").value]
-    );
-  console.log("choosen time slot", localStorage.getItem("choosenTimeSlot"));
-  getAvailableTables();
+    tableSessions[document.getElementById("selectTS").value]
+  );
+  console.log("choosen time slot ", localStorage.getItem("choosenTimeSlot"));
+
+  updateTable(
+    document.getElementById("datefield").value,
+    document.getElementById("selectTS").value
+  );
 }
 
 function proocedToMenu() {
@@ -159,12 +134,12 @@ function proocedToMenu() {
   console.log("choosenTimeSlot", localStorage.getItem("choosenTimeSlot"));
   console.log("choosentables", localStorage.getItem("choosentables"));
 
-    // this doesnt work it takes by default the first date
+  // this doesnt work it takes by default the first date
   if (localStorage.getItem("choosenDate") == null) {
     alert("Please select a date");
     return;
   }
-  
+
   // this doesnt work it takes by default the first time slot
   if (localStorage.getItem("choosenTimeSlot") == null) {
     alert("Please select a time slot");
@@ -180,5 +155,18 @@ function proocedToMenu() {
   window.location.href = "menu.html";
 }
 
+let date = new Date();
+document.getElementById("datefield").value =
+  date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+
+document
+  .getElementById("datefield")
+  .setAttribute(
+    "min",
+    date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
+  );
+
+
 getTablePrices();
 getTableSessions();
+updateData();

@@ -1,25 +1,24 @@
 from Actions.transaction_service import TransactionService
-from Repositories.table_repository import TableRepository
+from  Repositories.table_repository import TableRepository
+from  Repositories.order_repository import OrderRepositry
+from  Repositories.items_repository import ItemsRepository
+from  Repositories.menu_repository import MenuRepository
 import json
 from sqlite3 import Date
-# {'items': [{'itemId': 1, 'quantity': 2, 'price': 10, 'name': 'Not so good Bangdo', 'totalPrice': 20},
-#            {'itemId': 1, 'quantity': 2, 'price': 4200, 'name': 'chilli chicken', 'totalPrice': 8400},
-#            {'itemId': 1, 'quantity': 2, 'price': 12345, 'name': 'Special Whole Egg Maker', 'totalPrice': 24690}
-#            ],
-#  'table_number': '["1","5","9"]',
-#  'table_time_slot': '13-14',
-#  'table_time_slot_id': '6',
-#  'table_date': '2022-10-13',
-#  'table_total_price': '15000',
-#  'total_dishes_price': '33110'
-#  }
 
 class TransactionServiceImpl(TransactionService):
     def set_transaction_data(self, json_data):
+        print("doing reservation")
         reservation_id = self.validate_and_store_table(json_data["table_number"], json_data["table_time_slot_id"], json_data["table_date"])
-        # order_id = validate_and_store_dishes(json_data["items"])
+        if reservation_id == False:
+            return "reservation_failed"
+        print("doing orders")
+        order_id = self.validate_and_store_dishes(json_data["items"],json_data["specialInstructions"])
+        if order_id == False:
+            return "order_failed"
         # store_transaction_details(reservation_id, order_id, json_data["table_total_price"], json_data["total_dishes_price"])
-        return reservation_id
+        print("returning id")
+        return int(reservation_id)
     
     def validate_and_store_table(self, table_numbers, table_time_slot_id, table_date):
         table_numbers = json.loads(table_numbers)
@@ -47,3 +46,17 @@ class TransactionServiceImpl(TransactionService):
             if not TableRepository.is_table_available(table, table_time_slot_id, table_date):
                 return False
         return True
+
+    def validate_and_store_dishes(self, dishes, specialInstructions):
+        print("storing order")
+        order_id=OrderRepositry.insert_order_record(specialInstructions)
+        print("dishes")
+        for dish in dishes:
+            print("dish", dish)
+            if MenuRepository.get_first_menu_record(dish['itemId']) is None:
+                print("Invalid item id")
+                return False
+            print("calling insert_items_record")
+            ItemsRepository.insert_items_record(order_id, dish['itemId'], dish['quantity'])
+        return order_id
+        
