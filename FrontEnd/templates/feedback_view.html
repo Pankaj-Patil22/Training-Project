@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    />
+    <script src="../JS/feedback.js" defer></script>
+    <link rel="stylesheet" href="../CSS/feedback.css" />
+    <title>Feedback</title>
+    <style>
+      .checked {
+        color: orange;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper-div">
+      <div class="Overall-feedback" id="overall_feedback">
+        Overall Rating:
+        <div class="overall-rating">
+          <input
+            type="range"
+            min="0"
+            max="5"
+            value="0"
+            id="overall_rating"
+            onchange="changeOverallRating()"
+          />
+          <span id="overall_rating_value">0</span>
+        </div>
+        <div class="overall-review">
+          <textarea
+            name="overall-review"
+            id="overall_review"
+            cols="50"
+            rows="5"
+            placeholder="Write your review here..."
+          ></textarea>
+        </div>
+      </div>
+      <div class="item-feedback" id="item_feedback">Items Feedback:</div>
+    </div>
+
+    <button type="submit" id="submit_feedback_btn">Submit Feedback</button>
+  </body>
+</html>
